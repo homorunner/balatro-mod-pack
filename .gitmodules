@@ -1,0 +1,19 @@
+[submodule "Better-Mouse-And-Gamepad"]
+	path = Better-Mouse-And-Gamepad
+	url = https://github.com/homorunner/Better-Mouse-And-Gamepad.git
+[submodule "Cryptid"]
+	path = Cryptid
+	url = https://github.com/homorunner/Cryptid.git
+	branch = balanced
+[submodule "MoreFluff"]
+	path = MoreFluff
+	url = https://github.com/homorunner/MoreFluff.git
+[submodule "Steamodded"]
+	path = Steamodded
+	url = https://github.com/Steamodded/smods.git
+[submodule "Talisman"]
+	path = Talisman
+	url = https://github.com/MathIsFun0/Talisman.git
+[submodule "Galdur"]
+	path = Galdur
+	url = https://github.com/Eremel/Galdur.git
