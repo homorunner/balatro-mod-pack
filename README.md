@@ -2,7 +2,9 @@
 
 ## Install
 
-Run in powershell:
+Install [Lovely](https://github.com/ethangreen-dev/lovely-injector) first.
+
+After installing lovely, run following command in powershell:
 
 ```powershell
 cd $env:APPDATA\Balatro
