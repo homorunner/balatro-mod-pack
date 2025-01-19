@@ -4,7 +4,6 @@
 --- MOD_AUTHOR: [Betmma, nicholassam6425]
 --- MOD_DESCRIPTION: Adds voucher pack that allows you to redeem 1 of 3 vouchers. The code is based on Coupon Book mod made by nicholassam6425.
 --- PREFIX: betmma_voucher_pack
---- DEPENDENCIES: [BetmmaVouchers]
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
