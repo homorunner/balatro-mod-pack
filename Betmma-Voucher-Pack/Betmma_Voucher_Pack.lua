@@ -17,12 +17,15 @@ IN_SMOD1=MODDED_VERSION>='1.0.0'
     SMODS.current_mod=SMODS.current_mod or {}
     function SMODS.current_mod.process_loc_text()
         for k,v in pairs(loc_table) do
-            G.localization.descriptions.Other[k]=v
+            SMODS.process_loc_text(G.localization.descriptions.Other, k, v)
         end
         for k,v in pairs(dict_loc_table) do
-            G.localization.misc.dictionary['k_'..k]=v
+            SMODS.process_loc_text(G.localization.misc.dictionary, 'k_'..k, v)
         end
-        G.localization.misc.dictionary.k_voucher_pack = "Voucher Pack"
+        SMODS.process_loc_text(G.localization.misc.dictionary, 'k_voucher_pack', {
+            ['en-us'] = "Voucher Pack",
+            ['zh_CN'] = "优惠券包",
+        })
         -- G.localization.descriptions.Booster=G.localization.descriptions.Booster or {}
         -- G.localization.descriptions.Booster['p_voucher_pack'] = {
         --     name='Voucher Pack???',
@@ -30,10 +33,9 @@ IN_SMOD1=MODDED_VERSION>='1.0.0'
         -- }--newBoosterText
     end
 
-    function addBooster(id, name, order, discovered, weight, kind, cost, pos, config, desc, alerted, sprite_path, sprite_name, selection_state, color)
+    function addBooster(id, name, name_i18n, order, discovered, weight, kind, cost, pos, config, desc_i18n, alerted, sprite_path, sprite_name, selection_state, color)
         id = id or "p_placeholder" .. #G.P_CENTER_POOLS["Booster"] + 1
         name = name or "Placeholder Pack"
-        -- pack_contents = pack_contents or function(_) end
         order = order or #G.P_CENTER_POOLS["Booster"] + 1
         discovered = discovered or true
         weight = weight or 1
@@ -41,7 +43,6 @@ IN_SMOD1=MODDED_VERSION>='1.0.0'
         cost = cost or 4
         pos = pos or {x=0, y=5}
         config = config or {}
-        desc = desc or {"Placeholder"}
         alerted = alerted or true
         sprite_path = sprite_path or nil
         sprite_name = sprite_name or nil
@@ -76,7 +77,6 @@ IN_SMOD1=MODDED_VERSION>='1.0.0'
             atlas = "Booster",
             set = "Booster",
             config = config,
-            desc = desc,
             alerted = alerted,
             modded_sprite = modded_sprite,
             key = id,
@@ -88,17 +88,18 @@ IN_SMOD1=MODDED_VERSION>='1.0.0'
         G.P_CENTERS[id] = newBooster
 
         --add name + description to the localization object
-        local newBoosterText = {name=name, text=desc, text_parsed={}, name_parsed={}}
-        for _, line in ipairs(desc) do
-            newBoosterText.text_parsed[#newBoosterText.text_parsed+1] = loc_parse_string(line)
-        end
-        for _, line in ipairs(type(newBoosterText.name) == 'table' and newBoosterText.name or {newBooster.name}) do
-            newBoosterText.name_parsed[#newBoosterText.name_parsed+1] = loc_parse_string(line)
+        local newBoosterText = {}
+        for lang, name in pairs(name_i18n) do
+            local desc = desc_i18n[lang]
+            newBoosterText[lang] = {name=name, text=desc, text_parsed={}, name_parsed={loc_parse_string(name)}}
+            for index, line in ipairs(desc) do
+                newBoosterText[lang].text_parsed[index] = loc_parse_string(line)
+            end
         end
         loc_table[id]=newBoosterText
-        dict_loc_table[id]=name
-        G.localization.descriptions.Other[id] = newBoosterText
-        G.localization.misc.dictionary['k_'..id]=name
+        dict_loc_table[id]=name_i18n
+        -- G.localization.descriptions.Other[id] = newBoosterText
+        -- G.localization.misc.dictionary['k_'..id]=name
         -- G.localization.descriptions.Booster=G.localization.descriptions.Booster or {}
         -- G.localization.descriptions.Booster[id] = {
         --     name=name,
@@ -131,60 +132,79 @@ IN_SMOD1=MODDED_VERSION>='1.0.0'
     
         addBooster(
             "p_voucher_pack",   --id
-            "Voucher Pack",              --name
-            -- pack_contents,              --pack contents
+            "Voucher Pack",     --name
+            {
+                ['en-us'] = "Voucher Pack",
+                ['zh_CN'] = "优惠券包",
+            },                          --name_i18n
             nil,                        --order
             true,                       --discovered
-            1.4,                          --weight
+            1.4,                        --weight
             "Standard",                 --kind
-            12,                         --cost
+            10,                         --cost
             {x=0,y=0},                  --pos
             {extra = 3, choose = 1},    --config
-            {"Choose {C:attention}#1#{} of up to","{C:attention}#2#{} Vouchers", "to be redeemed"}, --desc
+            {
+                ['en-us'] = {"Choose {C:attention}#1#{} of up to","{C:attention}#2#{} Vouchers", "to be redeemed"},
+                ['zh_CN'] = {"从{C:attention}#1#{}张优惠券中","选择{C:attention}#2#{}张进行兑换"},
+            },                          --desc
             true,                       --alerted
             "assets",                   --sprite path
-            "p_voucher_pack.png",          --sprite name
-            --{px=71, py=95},             --sprite size
-            G.STATES.PLANET_PACK,        --selection_state
+            "p_voucher_pack.png",       --sprite name
+            --{px=71, py=95},           --sprite size
+            G.STATES.PLANET_PACK,       --selection_state
             {color=HEX('a6009b'),background_color=HEX('b849b0')} --color
         )
 
         addBooster(
-            "p_uncommon_voucher_pack",   --id
-            "Uncommon Voucher Pack",              --name
-            -- pack_contents,              --pack contents
+            "p_uncommon_voucher_pack",  --id
+            "Uncommon Voucher Pack",    --name
+            {
+                ['en-us'] = "Uncommon Voucher Pack",
+                ['zh_CN'] = "稀有优惠券包",
+            },                          --name_i18n
             nil,                        --order
             true,                       --discovered
-            0.6,                          --weight
+            0.6,                        --weight
             "Standard",                 --kind
             12,                         --cost
             {x=0,y=0},                  --pos
             {extra = 3, choose = 1},    --config
-            {"Choose {C:attention}#1#{} of up to","{C:attention}#2#{} Uncommon Vouchers", "to be redeemed"}, --desc
+            {
+                ['en-us'] = {"Choose {C:attention}#1#{} of up to","{C:attention}#2#{} Uncommon Vouchers", "to be redeemed"},
+                ['zh_CN'] = {"从{C:attention}#1#{}张稀有优惠券中","选择{C:attention}#2#{}张进行兑换"},
+            },                          --desc
             true,                       --alerted
             "assets",                   --sprite path
             "p_uncommon_voucher_pack.png",          --sprite name
-            --{px=71, py=95},             --sprite size
-            G.STATES.PLANET_PACK,        --selection_state
+            --{px=71, py=95},           --sprite size
+            G.STATES.PLANET_PACK,       --selection_state
             {color=HEX('009116'),background_color=HEX('61d473')} --color
         )
         addBooster(
-            "p_fusion_voucher_pack",   --id
-            "Fusion Voucher Pack",              --name
-            -- pack_contents,              --pack contents
+            "p_fusion_voucher_pack",    --id
+            "Fusion Voucher Pack",      --name
+            {
+                ['en-us'] = "Fusion Voucher Pack",
+                ['zh_CN'] = "高级优惠券包",
+            },                          --name_i18n
+            -- pack_contents,           --pack contents
             nil,                        --order
             true,                       --discovered
-            0.3,                          --weight
+            0.3,                        --weight
             "Standard",                 --kind
             18,                         --cost
             {x=0,y=0},                  --pos
             {extra = 3, choose = 1},    --config
-            {"Choose {C:attention}#1#{} of up to","{C:attention}#2#{} Fusion Vouchers", "to be redeemed"}, --desc
+            {
+                ['en-us'] = {"Choose {C:attention}#1#{} of up to", "{C:attention}#2#{} Fusion Vouchers", "to be redeemed"},
+                ['zh_CN'] = {"从{C:attention}#1#{}张高级优惠券中", "选择{C:attention}#2#{}张进行兑换"},
+            },                          --desc
             true,                       --alerted
             "assets",                   --sprite path
             "p_fusion_voucher_pack.png",          --sprite name
-            --{px=71, py=95},             --sprite size
-            G.STATES.PLANET_PACK,        --selection_state
+            --{px=71, py=95},           --sprite size
+            G.STATES.PLANET_PACK,       --selection_state
             {color=HEX('d11966'),background_color=HEX('f5a2a4')} --color
         )
     end

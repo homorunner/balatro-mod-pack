@@ -21,6 +21,12 @@ if (Test-Path -Path "Mods") {
 Rename-Item -Path "balatro-mod-pack" -NewName "Mods" -ErrorAction Stop
 ```
 
+## FAQ
+
+### Why scoring animation was lost?
+
+Check Talisman settings, scoring animation is by default disabled in Talisman mod.
+
 ## Mods
 
 ### Aurinko
@@ -33,7 +39,7 @@ Planet card can have editions.
 
 ### Betmma Voucher Pack
 
-Author: Betmma, nicholassam6425
+Author: Betmma, nicholassam6425, homorunner(localization)
 
 Github link: https://github.com/betmma/my_balatro_mods
 
