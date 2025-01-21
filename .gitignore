@@ -1,2 +1,6 @@
+# Lovely
 lovely/
 .lovelyignore
+
+# VSCode
+.vscode/
