@@ -17,3 +17,9 @@
 [submodule "Galdur"]
 	path = Galdur
 	url = https://github.com/Eremel/Galdur.git
+[submodule "CardSleeves"]
+	path = CardSleeves
+	url = https://github.com/larswijn/CardSleeves.git
+[submodule "Better-Credit-Card"]
+	path = Better-Credit-Card
+	url = https://github.com/homorunner/BetterCreditCard.git
