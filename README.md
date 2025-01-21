@@ -27,6 +27,10 @@ Rename-Item -Path "balatro-mod-pack" -NewName "Mods" -ErrorAction Stop
 
 Check Talisman settings, scoring animation is by default disabled in Talisman mod.
 
+### I want FasterStakesUnlock mod.
+
+FasterStakesUnlock is incompatible with Galdur. Use Galdur settings to unlock more stakes.
+
 ## Mods
 
 ### Aurinko
