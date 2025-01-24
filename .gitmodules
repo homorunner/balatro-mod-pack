@@ -23,3 +23,6 @@
 [submodule "Better-Credit-Card"]
 	path = Better-Credit-Card
 	url = https://github.com/homorunner/BetterCreditCard.git
+[submodule "Planet-Card-Cash-Out"]
+	path = Planet-Card-Cash-Out
+	url = https://github.com/antler5/Balatro-Planet-Card-Cash-Out-Mod.git
