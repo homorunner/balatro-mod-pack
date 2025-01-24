@@ -9,7 +9,7 @@ After installing lovely, run following command in powershell:
 ```powershell
 cd $env:APPDATA\Balatro
 
-git clone https://github.com/homorunner/balatro-mod-pack.git
+git clone --recursive https://github.com/homorunner/balatro-mod-pack.git
 
 if (Test-Path -Path "Mods") {
     Get-ChildItem -Path "Mods" | ForEach-Object {
@@ -80,3 +80,28 @@ Author: MathIsFun_, Mathguy24, jenwalter666, cg-223
 Github link: https://github.com/MathIsFun0/Talisman
 
 Increases the score cap, making it hard to reach nan/inf.
+
+### Card Sleeves
+
+Author: LarsWijn
+
+Github link: https://github.com/larswijn/CardSleeves
+
+Add card sleeves.
+
+### Better Credit Card
+
+Author: homorunner
+
+Github link: https://github.com/homorunner/BetterCreditCard
+
+Enhanced the original joker "Credit Card".
+
+### Planet Card Cash Out
+
+Author: antlers
+
+Github link: https://github.com/antler5/Balatro-Planet-Card-Cash-Out-Mod
+
+Allow using a planet card while the cash-out animation.
+
